@@ -1,3 +1,0 @@
-name: 01-hello
-runtime: nodejs
-description: An example of a super-simple static website made with Pulumi

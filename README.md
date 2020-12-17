@@ -1,6 +1,6 @@
 # Examples from The Pulumi Book
 
-![Build](https://github.com/pulumibook/examples/workflows/Build/badge.svg)
+![Build](https://github.com/thepulumibook/examples/workflows/Build/badge.svg)
 
 :point_up: If this is green, it means that all of the examples in this repo are working as written.
 

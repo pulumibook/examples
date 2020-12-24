@@ -1,0 +1,3 @@
+name: cloud-notifier
+runtime: nodejs
+description: A Pulumi program that sends text messages with AWS.

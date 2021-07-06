@@ -13,6 +13,6 @@ The book is still a work in progress, so expect changes over the next several mo
 Thanks for your interest, and stay tuned!
 
 <a href="https://thepulumibook.com">
-    <img width="260" alt="The Pulumi Book" src="https://user-images.githubusercontent.com/274700/103581946-c955cd00-4e91-11eb-8e44-5339dbd3f3ac.png">
+    <img width="260" alt="The Pulumi Book" src="https://user-images.githubusercontent.com/274700/124629560-6a6c1300-de36-11eb-94dc-f2a7b98b5f98.png">
 </a>
 

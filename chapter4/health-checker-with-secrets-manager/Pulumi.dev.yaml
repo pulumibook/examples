@@ -1,0 +1,6 @@
+config:
+  aws:region: us-west-2
+  health-checker-with-secrets-manager:schedule: rate(1 minute)
+  health-checker-with-secrets-manager:siteURL: https://thepulumibook.com/ch03/health-checker/api/dev
+  health-checker-with-secrets-manager:webhookURL:
+    secure: AAABAI03tLKp8bIqiGAEy45vYIeQUQVb/xLGJZ+HlXkeGzwZtqr++V+Ta0aJyHJ0wjIXaqghMvK7FqjNHXQ/aBoJIKsSqur0iSgx+dZ6irbTMn+beWcy2pR3LhxjRl/4wWew2fJAzPjwhXhBGUO64xk=

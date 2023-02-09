@@ -14,5 +14,4 @@ const homepage = new aws.s3.BucketObject("index.html", {
     contentType: "text/html"
 });
 
-export const url = bucket.websiteEndpoint
-    .apply(endpoint => `http://${endpoint}`);
+export const url = bucket.websiteEndpoint;

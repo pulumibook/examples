@@ -11,11 +11,10 @@ const homepage = new aws.s3.BucketObject("index.html", {
     acl: aws.s3.PublicReadAcl,
     content: `
         <html>
-            <body>Hello, world.</body>
+            <body>Hello, world!</body>
         </html>
     `,
     contentType: "text/html"
 });
 
-export const url = bucket.websiteEndpoint
-    .apply(endpoint => `http://${endpoint}`);
+export const url = bucket.websiteEndpoint;

@@ -14,22 +14,22 @@ for program in $programs; do
     echo "------------"
     echo
 
-    # Set any required environment variables.
-    if [ $program == "./chapter3/health-checker" ]; then
-        export SCHEDULE="foo";
-        export SITE_URL="foo";
-        export WEBHOOK_URL="foo";
-    fi
-
-    if [ $program == "./chapter4/health-checker-with-secrets-manager" ]; then
-        pulumi -C $program config set webhookURL https://some-url --secret
-    fi
-
     pushd "$program" || exit 1
         npm install
 
         pulumi stack init dev || true
         pulumi stack select dev
+
+        # Set any required environment variables.
+        if [ $program == "./chapter3/health-checker" ]; then
+            export SCHEDULE="foo";
+            export SITE_URL="foo";
+            export WEBHOOK_URL="foo";
+        fi
+
+        if [ $program == "./chapter4/health-checker-with-secrets-manager" ]; then
+            pulumi -C $program config set webhookURL https://some-url --secret
+        fi
 
         pulumi destroy --yes
         pulumi preview --non-interactive

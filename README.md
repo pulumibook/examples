@@ -1,6 +1,6 @@
 # Examples from The Pulumi Book
 
-![Build Status](https://github.com/thepulumibook/examples/actions/workflows/ci.yml/badge.svg?branch=main)
+![Build Status](https://github.com/thepulumibook/examples/actions/workflows/test.yml/badge.svg?branch=main)
 
 :point_up: If this is green, it means that all of the examples in this repo are working as written.
 

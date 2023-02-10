@@ -33,9 +33,7 @@ for program in $programs; do
 
         pulumi destroy --yes
         pulumi preview --non-interactive
-
-        # pulumi up --yes --non-interactive
-
+        pulumi up --yes --non-interactive
         pulumi destroy --yes
 
     popd || exit 1

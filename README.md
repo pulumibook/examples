@@ -1,6 +1,6 @@
 # Examples from The Pulumi Book
 
-![Build](https://github.com/thepulumibook/examples/workflows/Build/badge.svg)
+![Build Status](https://github.com/thepulumibook/examples/actions/workflows/ci.yml/badge.svg?branch=main)
 
 :point_up: If this is green, it means that all of the examples in this repo are working as written.
 
@@ -15,4 +15,3 @@ Thanks for your interest, and stay tuned!
 <a href="https://thepulumibook.com">
     <img width="260" alt="The Pulumi Book" src="https://user-images.githubusercontent.com/274700/124629560-6a6c1300-de36-11eb-94dc-f2a7b98b5f98.png">
 </a>
-

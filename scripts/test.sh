@@ -28,7 +28,7 @@ for program in $programs; do
         fi
 
         if [ $program == "./chapter4/health-checker-with-secrets-manager" ]; then
-            pulumi -C $program config set webhookURL https://some-url --secret
+            pulumi config set webhookURL https://some-url --secret
         fi
 
         pulumi destroy --yes

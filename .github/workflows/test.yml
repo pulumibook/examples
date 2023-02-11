@@ -21,7 +21,7 @@ jobs:
         uses: pulumi/setup-pulumi@v2
 
       - name: Install the latest Node
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
 
       - run: |
           make test

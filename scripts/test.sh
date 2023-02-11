@@ -26,6 +26,12 @@ for program in $programs; do
             export SCHEDULE="foo";
             export SITE_URL="foo";
             export WEBHOOK_URL="foo";
+
+            npm install got@11
+        fi
+
+        if [ $program == "./chapter4/health-checker" ]; then
+            npm install got@11
         fi
 
         if [ $program == "./chapter4/health-checker-with-secrets-manager" ]; then
@@ -33,8 +39,7 @@ for program in $programs; do
         fi
 
         pulumi destroy --yes
-        pulumi preview --non-interactive
-        pulumi up --yes --non-interactive
+        pulumi up --yes --non-interactive || pulumi destroy --yes
         pulumi destroy --yes
 
     popd || exit 1

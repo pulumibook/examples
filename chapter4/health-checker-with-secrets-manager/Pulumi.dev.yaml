@@ -3,4 +3,4 @@ config:
   health-checker-with-secrets-manager:schedule: rate(1 minute)
   health-checker-with-secrets-manager:siteURL: https://thepulumibook.com/ch03/health-checker/api/dev
   health-checker-with-secrets-manager:webhookURL:
-    secure: AAABAPz28Hqfk/5o+mnTWCYD7GKfhjMKeoAC2ximaLeCBR7yZZ/+XTELYEm/fL/3
+    secure: AAABAB1q3EMXCa51OFdKpJ9Sse9xPiZvVsdWQEgoNGqwNlBM5d0TR6QoF10S2cLJ

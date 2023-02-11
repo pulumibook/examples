@@ -15,6 +15,7 @@ for program in $programs; do
     echo
 
     pushd "$program" || exit 1
+        ncu -u
         npm install
 
         pulumi stack init dev || true

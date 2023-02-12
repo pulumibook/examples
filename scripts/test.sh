@@ -27,7 +27,7 @@ for program in $programs; do
             npm install got@11
             export SCHEDULE="rate(1 minute)";
             export SITE_URL="https://thepulumibook.com/ch03/health-checker/api/dev";
-            export WEBHOOK_URL="https://hooks.slack.com/services/<team>/<service>/<token>";
+            export WEBHOOK_URL="$HEALTH_CHECKER_SLACK_WEBHOOK_URL";
         fi
 
         if [ $program == "./chapter4/health-checker" ]; then

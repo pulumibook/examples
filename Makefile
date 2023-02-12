@@ -1,5 +1,5 @@
 ensure:
 	npm install -g npm-check-updates
 
-test: ensure
+test:
 	./scripts/test.sh

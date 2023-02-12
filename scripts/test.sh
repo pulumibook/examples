@@ -20,26 +20,27 @@ for program in $programs; do
 
         pulumi stack init dev || true
         pulumi stack select dev
+        pulumi destroy --yes
 
         # Set any required environment variables.
         if [ $program == "./chapter3/health-checker" ]; then
-            export SCHEDULE="foo";
-            export SITE_URL="foo";
-            export WEBHOOK_URL="foo";
-
             npm install got@11
+            export SCHEDULE="rate(1 minute)";
+            export SITE_URL="https://thepulumibook.com/ch03/health-checker/api/dev";
+            export WEBHOOK_URL="https://hooks.slack.com/services/<team>/<service>/<token>";
         fi
 
         if [ $program == "./chapter4/health-checker" ]; then
             npm install got@11
+            pulumi config refresh
         fi
 
         if [ $program == "./chapter4/health-checker-with-secrets-manager" ]; then
-            pulumi config set webhookURL https://some-url --secret
+            npm install got@11
+            pulumi config refresh
         fi
 
-        pulumi destroy --yes
-        pulumi up --yes --non-interactive || pulumi destroy --yes
+        pulumi up --yes
         pulumi destroy --yes
 
     popd || exit 1

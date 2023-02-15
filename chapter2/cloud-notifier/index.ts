@@ -8,7 +8,7 @@ const subscription = new aws.sns.TopicSubscription("subscription", {
     endpoint: "+12065551212"
 });
 
-const schedule = "cron(20 16 ? * SAT *)";
+const schedule = "rate(1 minute)";
 
 aws.cloudwatch.onSchedule("handler", schedule, () => {
     const kids = ["Oliver", "Sam", "Rosemary"];

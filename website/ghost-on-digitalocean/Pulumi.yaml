@@ -1,0 +1,19 @@
+name: ghost-on-digitalocean
+runtime: nodejs
+description: A minimal DigitalOcean TypeScript Pulumi program
+template:
+  config:
+    hostname:
+      description: The hostname (subdomain) of the website
+      default: dev
+    cloudflareDomain:
+      description: The existing Cloudflare domain name (zone) to use for the website
+    dropletImage:
+      description: The Ghost image to for the droplet
+      default: ghost-20-04
+    dropletSize:
+      description: The DigitalOcean droplet size to use for the server
+      default: s-2vcpu-2gb
+    sshPublicKeyPath:
+      description: The path to the SSH public key to use for the droplet
+      default: ~/.ssh/id_rsa.pub

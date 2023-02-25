@@ -15,6 +15,12 @@ for program in $programs; do
     echo
 
     pushd "$program" || exit 1
+
+        # Skip tests that can't be run yet.
+        if [ $program == "./website/ghost-on-digitalocean" ]; then
+            continue
+        fi
+
         ncu -u
         npm install
 

@@ -5,24 +5,26 @@ import * as mailgun from "@pulumi/mailgun";
 import * as random from "@pulumi/random";
 import * as fs from "fs";
 
+// Import the configuration settings.
 const config = new pulumi.Config();
 const hostname = config.require("hostname");
 const cloudflareDomain = config.require("cloudflareDomain");
 const dropletImage = config.require("dropletImage");
 const dropletSize = config.require("dropletSize");
 const sshPublicKeyPath = config.require("sshPublicKeyPath");
-const sshPrivateKeyPath = config.require("sshPrivateKeyPath");
 
+// Set a few local variables.
 const digitalOceanDomainName = hostname ? `${hostname}.${cloudflareDomain}` : cloudflareDomain;
 const digitalOceanDNSRecordName = hostname ? pulumi.interpolate`${hostname}.${cloudflareDomain}` : "@";
 const cloudflareDNSRecordNameForDroplet = hostname || "@";
 
+// Upload the SSH public key to DigitalOcean.
 const sshKey = new digitalocean.SshKey("ssh-key", {
     publicKey: fs.readFileSync(sshPublicKeyPath).toString("utf-8"),
 });
 
-// Provision a droplet.
-const droplet = new digitalocean.Droplet("digitalocean-droplet", { 
+// Provision a droplet using the specified SSH key.
+const droplet = new digitalocean.Droplet("digitalocean-droplet", {
     image: dropletImage,
     size: dropletSize,
     backups: true,
@@ -46,12 +48,6 @@ const record = new digitalocean.DnsRecord("digitalocean-dns-record", {
 
 // Generate a random password to be used for the SMTP server.
 const smtpPassword = new random.RandomPassword("smtp-password", {
-    length: 16,
-    special: true,
-}).result;
-
-// Generate a random password to use for the Ghost admin account.
-const adminPassword = new random.RandomPassword("admin-password", {
     length: 16,
     special: true,
 }).result;
@@ -112,16 +108,7 @@ mailgunDomain.receivingRecordsSets.apply(records => {
 
 // Export all of the generated goodies.
 export const ipv4Address = droplet.ipv4Address;
-export const sshCommand = pulumi.interpolate`ssh -i ${sshPrivateKeyPath} root@${ipv4Address}`;
 export const url = pulumi.interpolate`https://${dnsRecord.hostname}/ghost`;
-
-export const adminCreds = pulumi.jsonStringify({
-    title: "The Pulumi Book",
-    name: "Christian Nunciato",
-    email: "chris@nunciato.org",
-    password: adminPassword,
-});
-
 export const mailConfig = pulumi.jsonStringify({
     mail: {
         transport: "SMTP",
@@ -134,9 +121,3 @@ export const mailConfig = pulumi.jsonStringify({
         },
     },
 });
-
-export const usefulURLs = {
-    digitalocean: "https://cloud.digitalocean.com/projects",
-    mailgun: "https://app.mailgun.com/app/sending/domains",
-    cloudflare: "https://dash.cloudflare.com",
-};

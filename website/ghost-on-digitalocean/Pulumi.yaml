@@ -1,6 +1,6 @@
 name: ghost-on-digitalocean
 runtime: nodejs
-description: A minimal DigitalOcean TypeScript Pulumi program
+description: An example of deploying Ghost on DigitalOcean with Pulumi, Cloudflare, and Mailgun.
 template:
   config:
     hostname:
@@ -16,4 +16,4 @@ template:
       default: s-2vcpu-2gb
     sshPublicKeyPath:
       description: The path to the SSH public key to use for the droplet
-      default: ~/.ssh/id_rsa.pub
+      default: /Users/yourname/.ssh/id_rsa.pub

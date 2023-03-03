@@ -1,0 +1,19 @@
+name: pulumi-cdk-static-website
+runtime: nodejs
+description: A TypeScript program that uses AWS CDK constructs to deploy a static website on AWS.
+
+template:
+  description: A TypeScript program that uses AWS CDK constructs to deploy a static website on AWS.
+  config:
+    aws-native:region:
+      description: The AWS region to deploy into
+      default: us-west-2
+    path:
+      description: The path to the folder containing the website
+      default: ./www
+    indexDocument:
+      description: The file to use for top-level pages
+      default: index.html
+    errorDocument:
+      description: The file to use for error pages
+      default: error.html

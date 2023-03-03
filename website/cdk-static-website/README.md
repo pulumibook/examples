@@ -2,12 +2,12 @@
 
 A simple example that combines AWS CDK constructs and Pulumi resources in the same program to deploy a static website on Amazon S3 and serve it with Amazon CloudFront.
 
-[![Deploy with Pulumi](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/cnunciato/pulumi-cdk-static-website)
+[![Deploy with Pulumi](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/pulumibook/examples/tree/main/website/cdk-static-website)
 
 To try it yourself, first [install Pulumi](https://www.pulumi.com/docs/get-started/install/), then create a new project using this repository as a template:
 
 ```
-$ pulumi new https://github.com/cnunciato/pulumi-cdk-static-website
+$ pulumi new https://github.com/pulumibook/examples/tree/main/website/cdk-static-website
 ```
 
 Follow the prompts, make sure your [AWS credentials are set](https://www.pulumi.com/registry/packages/aws-native/installation-configuration/#set-environment-variables), then deploy:
@@ -17,10 +17,10 @@ $ pulumi up
 
 Updating (dev)
 
-View Live: https://app.pulumi.com/cnunciato/pulumi-cdk-static-website/dev/updates/1
+View Live: https://app.pulumi.com/pulumibook/cdk-static-website/dev/updates/1
 
      Type                                            Name                              Status
- +   pulumi:pulumi:Stack                             pulumi-cdk-static-website-dev     created (253s)
+ +   pulumi:pulumi:Stack                             cdk-static-website-dev            created (253s)
  +   ├─ cdk:index:Stack                              cdk-stack                         created (0.45s)
  +   │  └─ cdk:construct:CDKStack                    cdk-stack/cdk-stack               created (0.27s)
  +   │     ├─ cdk:construct:Distribution             cdk-stack/cdk-stack/cdn           created (0.33s)

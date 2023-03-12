@@ -49,7 +49,7 @@ const callback = new aws.lambda.CallbackFunction("callback", {
     },
     policies: [
         aws.iam.ManagedPolicy.CloudWatchFullAccess,
-        "arn:aws:iam::aws:policy/SecretsManagerReadWrite",
+        aws.iam.ManagedPolicy.SecretsManagerReadWrite,
     ],
     environment: {
         variables: {

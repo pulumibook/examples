@@ -1,6 +1,6 @@
 # serverless-mediaconvert
 
-An example of a serverless video transcoder build with Pulumi and AWS Elemental MediaConvert.
+An example of a serverless video transcoder built with Pulumi and AWS Elemental MediaConvert.
 
 Accompanies the walkthrough at <https://pulumibook.info/serverless-architectures-aws-1-video-encoder/>.
 

@@ -1,4 +1,7 @@
 {
-  "name": "pulumibook-examples",
-  "version": "1.0.0"
+    "name": "pulumibook-examples",
+    "version": "1.0.0",
+    "scripts": {
+        "test": "./scripts/test.sh"
+    }
 }

@@ -1,7 +1,10 @@
 {
-    "name": "pulumibook-examples",
-    "version": "1.0.0",
+    "name": "examples",
+    "private": true,
     "scripts": {
         "test": "./scripts/test.sh"
+    },
+    "dependencies": {
+        "npm-check-updates": "^17.1.3"
     }
 }

@@ -6,15 +6,14 @@ const siteURL = process.env.SITE_URL;
 const webhookURL = process.env.WEBHOOK_URL;
 
 if (!schedule || !siteURL || !webhookURL) {
-    throw new Error("Missing one or more environment variables.")
+    throw new Error("Missing one or more environment variables.");
 }
 
 aws.cloudwatch.onSchedule("subscription", schedule, async () => {
     try {
         const response = await got(siteURL);
         console.log(`Site's up! Status was ${response.statusCode}.`);
-    }
-    catch(error) {
+    } catch (error: any) {
         const status = error.response.statusCode;
         const message = JSON.parse(error.response.body).message;
 
@@ -23,11 +22,10 @@ aws.cloudwatch.onSchedule("subscription", schedule, async () => {
                 json: {
                     username: "health-check",
                     icon_emoji: ":scream:",
-                    text: `${siteURL} returned HTTP ${status} (${message}).`
-                }
+                    text: `${siteURL} returned HTTP ${status} (${message}).`,
+                },
             });
-        }
-        catch(error) {
+        } catch (error: any) {
             console.error(`Error posting to Slack: ${error}`);
         }
     }

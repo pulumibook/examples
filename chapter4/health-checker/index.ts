@@ -19,8 +19,7 @@ const callback = new aws.lambda.CallbackFunction("callback", {
         try {
             const response = await got(siteURL);
             console.log(`Site's up! Status was ${response.statusCode}.`);
-        }
-        catch(error) {
+        } catch (error: any) {
             const status = error.response.statusCode;
             const message = JSON.parse(error.response.body).message;
 
@@ -29,19 +28,18 @@ const callback = new aws.lambda.CallbackFunction("callback", {
                     json: {
                         username: "health-check",
                         icon_emoji: ":scream:",
-                        text: `${siteURL} returned HTTP ${status} (${message}).`
-                    }
+                        text: `${siteURL} returned HTTP ${status} (${message}).`,
+                    },
                 });
-            }
-            catch(error) {
+            } catch (error: any) {
                 console.error(`Error posting to Slack: ${error}`);
             }
         }
     },
     environment: {
         variables: {
-            WEBHOOK_URL: webhookURL
-        }
+            WEBHOOK_URL: webhookURL,
+        },
     },
 });
 

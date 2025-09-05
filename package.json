@@ -5,6 +5,9 @@
         "test": "./scripts/test.sh"
     },
     "dependencies": {
+        "@pulumi/aws": "^7.6.0",
+        "@pulumi/awsx": "^3.0.0",
+        "@pulumi/pulumi": "^3.192.0",
         "npm-check-updates": "^17.1.3"
     }
 }

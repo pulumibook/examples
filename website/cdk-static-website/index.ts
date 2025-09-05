@@ -41,13 +41,13 @@ class CDKStack extends pulumicdk.Stack {
     }
 }
 
-const cdkStack =  new CDKStack("cdk-stack");
+const cdkStack = new CDKStack("cdk-stack");
 
 // Sync a local folder to the bucket exported by the CDK stack.
 const folder = new synced.S3BucketFolder("folder", {
     bucketName: cdkStack.bucketName,
     path: path,
-    acl: "public-read",
+    acl: "public-read", // Required by synced-folder package
 });
 
 // Export the S3 and CloudFront URLs.

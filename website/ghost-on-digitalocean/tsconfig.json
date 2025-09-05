@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "strict": true,
+        "skipLibCheck": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -12,7 +13,5 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"
-    ]
+    "files": ["index.ts"]
 }

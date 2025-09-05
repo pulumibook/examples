@@ -5,8 +5,10 @@
         "@types/node": "^16"
     },
     "dependencies": {
+        "@pulumi/aws": "^7.6.0",
+        "@pulumi/awsx": "^3.0.0",
         "@pulumi/cdk": "^0.4.0",
-        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/pulumi": "^3.192.0",
         "@pulumi/synced-folder": "^0.0.9",
         "aws-cdk-lib": "^2.62.2",
         "constructs": "^10.1.232"

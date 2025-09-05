@@ -5,8 +5,9 @@
         "@types/node": "^16"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^3.0.0",
-        "@pulumi/aws": "^5.0.0",
-        "@pulumi/awsx": "^1.0.0"
+        "@pulumi/aws": "^7.6.0",
+        "@pulumi/awsx": "^3.0.0",
+        "@pulumi/pulumi": "^3.192.0",
+        "aws-sdk": "^2.1692.0"
     }
 }

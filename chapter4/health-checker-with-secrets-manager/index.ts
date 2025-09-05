@@ -1,6 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import got from "got";
+import { SecretsManager } from "aws-sdk";
 
 const config = new pulumi.Config();
 const schedule = config.require("schedule");
@@ -15,10 +16,12 @@ const secretVersion = new aws.secretsmanager.SecretVersion("webhookURLValue", {
 
 const callback = new aws.lambda.CallbackFunction("callback", {
     callback: async () => {
-        const secretsManager = new aws.sdk.SecretsManager();
-        const secretValue = await secretsManager.getSecretValue({
-            SecretId: secretVersion.arn.get(),
-        }).promise();
+        const secretsManager = new SecretsManager();
+        const secretValue = await secretsManager
+            .getSecretValue({
+                SecretId: secretVersion.arn.get(),
+            })
+            .promise();
 
         if (!secretValue.SecretString) {
             console.log("Unable to retrieve webhookURL. Exiting.");
@@ -28,8 +31,7 @@ const callback = new aws.lambda.CallbackFunction("callback", {
         try {
             const response = await got(siteURL);
             console.log(`Site's up! Status was ${response.statusCode}.`);
-        }
-        catch(error) {
+        } catch (error: any) {
             const status = error.response.statusCode;
             const message = JSON.parse(error.response.body).message;
 
@@ -38,11 +40,10 @@ const callback = new aws.lambda.CallbackFunction("callback", {
                     json: {
                         username: "health-check",
                         icon_emoji: ":scream:",
-                        text: `${siteURL} returned HTTP ${status} (${message}).`
-                    }
+                        text: `${siteURL} returned HTTP ${status} (${message}).`,
+                    },
                 });
-            }
-            catch(error) {
+            } catch (error: any) {
                 console.error(`Error posting to Slack: ${error}`);
             }
         }
@@ -53,8 +54,8 @@ const callback = new aws.lambda.CallbackFunction("callback", {
     ],
     environment: {
         variables: {
-            WEBHOOK_URL: webhookURL
-        }
+            WEBHOOK_URL: webhookURL,
+        },
     },
 });
 

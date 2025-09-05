@@ -15,7 +15,9 @@ const sshPublicKeyPath = config.require("sshPublicKeyPath");
 
 // Set a few local variables.
 const digitalOceanDomainName = hostname ? `${hostname}.${cloudflareDomain}` : cloudflareDomain;
-const digitalOceanDNSRecordName = hostname ? pulumi.interpolate`${hostname}.${cloudflareDomain}` : "@";
+const digitalOceanDNSRecordName = hostname
+    ? pulumi.interpolate`${hostname}.${cloudflareDomain}`
+    : "@";
 const cloudflareDNSRecordNameForDroplet = hostname || "@";
 
 // Upload the SSH public key to DigitalOcean.
@@ -28,9 +30,7 @@ const droplet = new digitalocean.Droplet("digitalocean-droplet", {
     image: dropletImage,
     size: dropletSize,
     backups: true,
-    sshKeys: [
-        sshKey.fingerprint,
-    ],
+    sshKeys: [sshKey.fingerprint],
 });
 
 // Provision a DigitalOcean domain.

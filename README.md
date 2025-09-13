@@ -2,7 +2,7 @@
 
 ## Welcome!
 
-Here you'll find all of the code snippets and examples from [_The Pulumi Book_](https://pulumibook.info), organized by chapter.
+Here you'll find all of the code snippets and examples from [_The Pulumi Book_](https://pulumibook.com), organized by chapter.
 
 The book is still a work in progress, so expect changes over the next several months.
 

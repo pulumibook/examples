@@ -1,0 +1,3 @@
+name: bucket-website-v2
+runtime: nodejs
+description: A minimal AWS TypeScript Pulumi program

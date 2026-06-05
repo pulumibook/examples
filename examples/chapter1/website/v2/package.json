@@ -1,0 +1,11 @@
+{
+    "name": "bucket-website-v2",
+    "devDependencies": {
+        "@types/node": "^24"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^7.6.0",
+        "@pulumi/awsx": "^3.0.0",
+        "@pulumi/pulumi": "^3.193.0"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "mediaconvert",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^16"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^7.6.0",
+        "@pulumi/awsx": "^3.0.0",
+        "@pulumi/pulumi": "^3.192.0",
+        "aws-sdk": "^2.1692.0"
+    }
+}

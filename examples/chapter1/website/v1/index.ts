@@ -2,27 +2,27 @@ import * as aws from "@pulumi/aws";
 
 const bucket = new aws.s3.Bucket("hello-world");
 
-const bucketWebsite = new aws.s3.BucketWebsiteConfiguration("bucketWebsite", {
+const bucketWebsite = new aws.s3.BucketWebsiteConfiguration("bucket-website", {
     bucket: bucket.bucket,
     indexDocument: {
         suffix: "index.html",
     },
 });
 
-const bucketOwnershipControls = new aws.s3.BucketOwnershipControls("bucket-ownership-controls", {
+const controls = new aws.s3.BucketOwnershipControls("ownership-controls", {
     bucket: bucket.id,
     rule: {
         objectOwnership: "ObjectWriter",
     },
 });
 
-const bucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock("bucket-public-access-block", {
+const block = new aws.s3.BucketPublicAccessBlock("public-access-block", {
     bucket: bucket.id,
     blockPublicAcls: false,
     blockPublicPolicy: false,
     ignorePublicAcls: false,
     restrictPublicBuckets: false,
-}, { dependsOn: [bucketOwnershipControls] });
+}, { dependsOn: [controls] });
 
 const bucketPolicy = new aws.s3.BucketPolicy("bucket-policy", {
     bucket: bucket.id,
@@ -35,7 +35,7 @@ const bucketPolicy = new aws.s3.BucketPolicy("bucket-policy", {
             Resource: `arn:aws:s3:::${bucketId}/*`,
         }],
     })),
-}, { dependsOn: [bucketPublicAccessBlock] });
+}, { dependsOn: [block] });
 
 const homepage = new aws.s3.BucketObject("index.html", {
     bucket: bucket.id,

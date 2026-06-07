@@ -14,9 +14,9 @@ const schedule = "rate(1 minute)";
 aws.cloudwatch.onSchedule("handler", schedule, () => {
     const kids = ["Oliver", "Sam", "Rosemary"];
 
-    const shuffledKids = kids.sort(() => (Math.random() > 0.5 ? -1 : 1)).join(", ");
+    const shuffled = kids.sort(() => Math.random() > .5 ? -1 : 1).join(", ");
 
-    const message = `This week's game-playing order: ${shuffledKids}.`;
+    const message = `This week's game-playing order: ${shuffled}.`;
 
     const sns = new SNS();
     sns.publish({

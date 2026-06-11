@@ -9,24 +9,29 @@ if (!schedule || !siteURL || !webhookURL) {
     throw new Error("Missing one or more environment variables.");
 }
 
-aws.cloudwatch.onSchedule("subscription", schedule, async () => {
-    try {
-        const response = await got(siteURL);
-        console.log(`Site's up! Status was ${response.statusCode}.`);
-    } catch (error: any) {
-        const status = error.response.statusCode;
-        const message = JSON.parse(error.response.body).message;
-
+const handler = new aws.lambda.CallbackFunction("subscription", {
+    policies: [aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole],
+    callback: async () => {
         try {
-            const response = await got.post(webhookURL, {
-                json: {
-                    username: "health-check",
-                    icon_emoji: ":scream:",
-                    text: `${siteURL} returned HTTP ${status} (${message}).`,
-                },
-            });
+            const response = await got(siteURL);
+            console.log(`Site's up! Status was ${response.statusCode}.`);
         } catch (error: any) {
-            console.error(`Error posting to Slack: ${error}`);
+            const status = error.response.statusCode;
+            const message = JSON.parse(error.response.body).message;
+
+            try {
+                const response = await got.post(webhookURL, {
+                    json: {
+                        username: "health-check",
+                        icon_emoji: ":scream:",
+                        text: `${siteURL} returned HTTP ${status} (${message}).`,
+                    },
+                });
+            } catch (error: any) {
+                console.error(`Error posting to Slack: ${error}`);
+            }
         }
-    }
+    },
 });
+
+aws.cloudwatch.onSchedule("subscription", schedule, handler);

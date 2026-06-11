@@ -1,7 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import got from "got";
-import { SecretsManager } from "aws-sdk";
+import { SecretsManager } from "@aws-sdk/client-secrets-manager";
 
 const config = new pulumi.Config();
 const schedule = config.require("schedule");
@@ -15,13 +15,15 @@ const secretVersion = new aws.secretsmanager.SecretVersion("webhookURLValue", {
 });
 
 const callback = new aws.lambda.CallbackFunction("callback", {
+    policies: [
+        aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
+        aws.iam.ManagedPolicy.SecretsManagerReadWrite,
+    ],
     callback: async () => {
         const secretsManager = new SecretsManager();
-        const secretValue = await secretsManager
-            .getSecretValue({
-                SecretId: secretVersion.arn.get(),
-            })
-            .promise();
+        const secretValue = await secretsManager.getSecretValue({
+            SecretId: secretVersion.arn.get(),
+        });
 
         if (!secretValue.SecretString) {
             console.log("Unable to retrieve webhookURL. Exiting.");
@@ -47,15 +49,6 @@ const callback = new aws.lambda.CallbackFunction("callback", {
                 console.error(`Error posting to Slack: ${error}`);
             }
         }
-    },
-    policies: [
-        aws.iam.ManagedPolicy.CloudWatchFullAccess,
-        aws.iam.ManagedPolicy.SecretsManagerReadWrite,
-    ],
-    environment: {
-        variables: {
-            WEBHOOK_URL: webhookURL,
-        },
     },
 });
 

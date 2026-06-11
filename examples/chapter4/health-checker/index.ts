@@ -8,6 +8,7 @@ const siteURL = config.require("siteURL");
 const webhookURL = config.requireSecret("webhookURL");
 
 const callback = new aws.lambda.CallbackFunction("callback", {
+    policies: [aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole],
     callback: async () => {
         const webhookURLFromEnv = process.env.WEBHOOK_URL;
 

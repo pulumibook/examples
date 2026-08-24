@@ -3,4 +3,4 @@ config:
   health-checker:schedule: rate(1 minute)
   health-checker:siteURL: https://pulumibook.com/ch03/health-checker/api/dev
   health-checker:webhookURL:
-    secure: AAABAOu+AGDnF5f3SPz3xuxvh9eyXsjrJCAVnXp4y5dRpiZ4LihKw8vjRG9MLhaWarz2V/MylSQZ8XmRGNUB3U4DBZhYu2l22z7OxVHxhJWY4MgkHcsfX7hTA7FZZ9FPSqJmVloERUyEoI2Gu3xeNbU=
+    secure: AAABAOuHvUSHW0L78ZYtgNVMzs7mcRcO/PwP6kJCKGvcD8oOASIHYgHvJnhDxPULtxFouY86urUkcxh8WyqdvMvHh38ofCMTaBavTQ==

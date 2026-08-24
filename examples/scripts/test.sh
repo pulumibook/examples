@@ -4,6 +4,14 @@ set -o errexit -o pipefail
 
 pulumi about
 
+# Create/select the example stacks in the org our credentials are scoped to.
+# In CI the token comes from GitHub OIDC via pulumi/auth-actions with
+# `organization: pulumibook`, so it can only operate on `pulumibook` stacks —
+# an unqualified `dev` resolves to the caller's individual org and fails with
+# "requires logging in". PULUMI_ORG names the target org; locally, with it
+# unset, we fall back to the caller's default org (unqualified `dev`).
+stack="${PULUMI_ORG:+$PULUMI_ORG/}dev"
+
 programs=$(find . -name "Pulumi.dev.yaml" -not -path "*/node_modules/*" -exec dirname {} \;)
 
 # Iterate through each program to make sure it installs, previews, deploy, and destroys successfully.
@@ -24,8 +32,8 @@ for program in $programs; do
         ncu -u
         npm install
 
-        pulumi stack init dev || true
-        pulumi stack select dev
+        pulumi stack init "$stack" || true
+        pulumi stack select "$stack"
         pulumi destroy --yes
 
         # Set any required environment variables.
